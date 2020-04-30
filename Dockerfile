@@ -1,4 +1,4 @@
-FROM smebberson/alpine-base:3.0.0
+FROM alpine-base:3.0.0
 MAINTAINER Scott Mebberson <scott@scottmebberson.com>
 
 # Install nginx
