@@ -1,0 +1,17 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: alpine-nginx
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: alpine-nginx
+    spec:
+      containers:
+        - name: alpine-nginx
+          image: avakapal/cf-kubernetes-test:$DOCKER_IMAGE_TAG
+          ports:
+            - containerPort: 80
+              name: http

@@ -1,0 +1,27 @@
+version: '1.0'
+
+steps:
+  build:
+    type: build
+    working-directory: ${{initial-clone}}
+    image-name: avakapal/cf-kubernetes-test
+    tag: '${{CF_REVISION}}'
+
+  push:
+    type: push
+    candidate: ${{build}}
+    tag: ${{CF_BRANCH}}
+
+  deploy-to-kubernetes-staging:
+    image: codefreshio/kubernetes-deployer:master
+    tag: latest
+    working-directory: ${{initial-clone}}
+    commands:
+      - /deploy/bin/deploy.sh ./root
+    environment:
+      - ENVIRONMENT=${{ENVIRONMENT}}
+      - KUBERNETES_USER=${{KUBERNETES_USER}}
+      - KUBERNETES_PASSWORD=${{KUBERNETES_PASSWORD}}
+      - KUBERNETES_SERVER=${{KUBERNETES_SERVER}}
+      - DOCKER_IMAGE_TAG=${{CF_REVISION}}
+
