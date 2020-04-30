@@ -1,4 +1,4 @@
-FROM alpine-base:3.0.0
+FROM alpine:latest
 MAINTAINER Scott Mebberson <scott@scottmebberson.com>
 
 # Install nginx
